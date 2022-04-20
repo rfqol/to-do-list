@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Task 1" },
-    { id: 2, title: "Task 2" },
-  ]);
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
+  function addTask() {
+    setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
+    setNewTask("");
+  }
 
   return (
     <div className="App">
@@ -15,6 +18,12 @@ function App() {
           <li key={task.id}>{task.title}</li>
         ))}
       </ul>
+      <input
+        type="text"
+        value={newTask}
+        onChange={e => setNewTask(e.target.value)}
+      />
+      <button onClick={addTask}>Add task</button>
     </div>
   );
 }
