@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -9,13 +10,25 @@ function App() {
     setNewTask("");
   }
 
+  function completeTask(e) {
+    if (e.target.checked) {
+      tasks.find(task => task.id == e.target.id).isDone = true;
+    } else {
+      tasks.find(task => task.id == e.target.id).isDone = false;
+    }
+    setTasks([...tasks]);
+  }
+
   return (
     <div className="App">
       <h1>To-do List</h1>
       <p>0/0 completed</p>
-      <ul>
+      <ul className="list">
         {tasks.map(task => (
-          <li key={task.id}>{task.title}</li>
+          <li key={task.id}>
+            <input onChange={completeTask} type="checkbox" id={task.id} />
+            {task.isDone ? <s>{task.title}</s> : <span>{task.title}</span>}
+          </li>
         ))}
       </ul>
       <input
