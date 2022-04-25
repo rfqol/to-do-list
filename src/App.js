@@ -7,7 +7,7 @@ function App() {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
 
   function addTask() {
-    if (newTask != "") {
+    if (newTask !== "") {
       setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
       setNewTask("");
     }
@@ -15,10 +15,10 @@ function App() {
 
   function completeTask(e) {
     if (e.target.checked) {
-      tasks.find(task => task.id == e.target.id).isDone = true;
+      tasks.find(task => task.id === +e.target.id).isDone = true;
       setCompletedTasksCount(completedTasksCount + 1);
     } else {
-      tasks.find(task => task.id == e.target.id).isDone = false;
+      tasks.find(task => task.id === +e.target.id).isDone = false;
       setCompletedTasksCount(completedTasksCount - 1);
     }
     setTasks([...tasks]);
@@ -43,7 +43,9 @@ function App() {
         value={newTask}
         onChange={e => setNewTask(e.target.value)}
       />
-      <button onClick={addTask}>Add task</button>
+      <button className="add-button" onClick={addTask}>
+        Add task
+      </button>
     </div>
   );
 }
