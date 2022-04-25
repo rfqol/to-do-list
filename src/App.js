@@ -7,8 +7,10 @@ function App() {
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
 
   function addTask() {
-    setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
-    setNewTask("");
+    if (newTask != "") {
+      setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
+      setNewTask("");
+    }
   }
 
   function completeTask(e) {
