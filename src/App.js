@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
 
   function addTask() {
     setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
@@ -13,8 +14,10 @@ function App() {
   function completeTask(e) {
     if (e.target.checked) {
       tasks.find(task => task.id == e.target.id).isDone = true;
+      setCompletedTasksCount(completedTasksCount + 1);
     } else {
       tasks.find(task => task.id == e.target.id).isDone = false;
+      setCompletedTasksCount(completedTasksCount - 1);
     }
     setTasks([...tasks]);
   }
@@ -22,7 +25,9 @@ function App() {
   return (
     <div className="App">
       <h1>To-do List</h1>
-      <p>0/0 completed</p>
+      <p>
+        {completedTasksCount}/{tasks.length} completed
+      </p>
       <ul className="list">
         {tasks.map(task => (
           <li key={task.id}>
