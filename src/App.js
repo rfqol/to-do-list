@@ -9,7 +9,7 @@ function App() {
 
   function addTask() {
     if (newTask !== "") {
-      setTasks([...tasks, { id: tasks.length + 1, title: newTask }]);
+      setTasks([...tasks, { id: Date.now() + 1, title: newTask }]);
       setNewTask("");
     }
   }
