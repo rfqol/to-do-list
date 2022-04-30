@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaTimes } from "react-icons/fa";
 import "./App.css";
 
 function App() {
@@ -24,6 +25,11 @@ function App() {
     setTasks([...tasks]);
   }
 
+  function deleteTask(task) {
+    task.isDone && setCompletedTasksCount(completedTasksCount - 1);
+    setTasks(tasks.filter(t => t.id !== task.id));
+  }
+
   return (
     <div className="App">
       <h1>To-do List</h1>
@@ -32,9 +38,19 @@ function App() {
       </p>
       <ul className="list">
         {tasks.map(task => (
-          <li key={task.id}>
-            <input onChange={completeTask} type="checkbox" id={task.id} />
-            {task.isDone ? <s>{task.title}</s> : <span>{task.title}</span>}
+          <li className="list__item" key={task.id}>
+            <div>
+              <input
+                className="item-check"
+                onChange={completeTask}
+                type="checkbox"
+                id={task.id}
+              />
+              {task.isDone ? <s>{task.title}</s> : <span>{task.title}</span>}
+            </div>
+            <button onClick={() => deleteTask(task)} className="remove-button">
+              <FaTimes style={{ verticalAlign: "middle" }} />
+            </button>
           </li>
         ))}
       </ul>
