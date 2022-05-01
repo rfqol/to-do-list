@@ -4,14 +4,19 @@ import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
   const [completedTasksCount, setCompletedTasksCount] = useState(0);
 
-  function addTask() {
-    if (newTask !== "") {
-      setTasks([...tasks, { id: Date.now() + 1, title: newTask }]);
-      setNewTask("");
-    }
+  async function addTask() {
+    await setTasks([...tasks, { id: Date.now() }]);
+    let tasksNodeList = document.querySelectorAll(".list__title");
+    let currentTask = tasksNodeList[tasksNodeList.length - 1];
+    currentTask.focus();
+    currentTask.addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        currentTask.blur();
+      }
+    });
   }
 
   function completeTask(e) {
@@ -50,7 +55,23 @@ function App() {
                 type="checkbox"
                 id={task.id}
               />
-              {task.isDone ? <s>{task.title}</s> : <span>{task.title}</span>}
+              {task.isDone ? (
+                <s>{task.title}</s>
+              ) : (
+                <span
+                  className="list__title"
+                  contentEditable="true"
+                  suppressContentEditableWarning={true}
+                  onBlur={e => {
+                    if (!e.target.innerText) {
+                      deleteTask(task);
+                    }
+                    tasks.find(t => t.id == task.id).title = e.target.innerText;
+                  }}
+                >
+                  {task.title}
+                </span>
+              )}
             </div>
             <button onClick={() => deleteTask(task)} className="remove-button">
               <FaTimes style={{ verticalAlign: "middle" }} />
@@ -58,11 +79,6 @@ function App() {
           </li>
         ))}
       </ul>
-      <input
-        type="text"
-        value={newTask}
-        onChange={e => setNewTask(e.target.value)}
-      />
       <button className="add-button" onClick={addTask}>
         Add task
       </button>

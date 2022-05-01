@@ -26,6 +26,10 @@ body {
   margin-right: .5rem;
 }
 
+.list__title {
+  outline: none;
+}
+
 .remove-button {
   border: none;
   background: none;
