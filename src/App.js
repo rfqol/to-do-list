@@ -37,13 +37,13 @@ function App() {
 
   return (
     <div className="App">
-      <h1>To-do List</h1>
+      <h1 className="title">To-do List</h1>
       {tasks.length ? (
-        <p>
+        <p className="subtitle">
           {completedTasksCount}/{tasks.length} completed
         </p>
       ) : (
-        <p>No tasks</p>
+        <p className="subtitle">No tasks</p>
       )}
       <ul className="list">
         {tasks.map(task => (
@@ -66,7 +66,8 @@ function App() {
                     if (!e.target.innerText) {
                       deleteTask(task);
                     }
-                    tasks.find(t => t.id == task.id).title = e.target.innerText;
+                    tasks.find(t => t.id === task.id).title =
+                      e.target.innerText;
                   }}
                 >
                   {task.title}

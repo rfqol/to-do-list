@@ -11,6 +11,16 @@ body {
   text-align: center;
 }
 
+.title {
+  font-size: 48px;
+  margin: 2rem 0 1rem;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin: 0 0 3rem;
+}
+
 .list {
   padding: 0;
   list-style: none;
@@ -20,6 +30,7 @@ body {
 .list__item {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .item-check {
