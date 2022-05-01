@@ -33,9 +33,13 @@ function App() {
   return (
     <div className="App">
       <h1>To-do List</h1>
-      <p>
-        {completedTasksCount}/{tasks.length} completed
-      </p>
+      {tasks.length ? (
+        <p>
+          {completedTasksCount}/{tasks.length} completed
+        </p>
+      ) : (
+        <p>No tasks</p>
+      )}
       <ul className="list">
         {tasks.map(task => (
           <li className="list__item" key={task.id}>
