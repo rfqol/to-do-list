@@ -51,6 +51,7 @@ function App() {
             <div>
               <input
                 className="item-check"
+                tabIndex="-1"
                 onChange={completeTask}
                 type="checkbox"
                 id={task.id}
@@ -62,6 +63,7 @@ function App() {
                   className="list__title"
                   contentEditable="true"
                   suppressContentEditableWarning={true}
+                  tabIndex="-1"
                   onBlur={e => {
                     if (!e.target.innerText) {
                       deleteTask(task);
@@ -74,13 +76,17 @@ function App() {
                 </span>
               )}
             </div>
-            <button onClick={() => deleteTask(task)} className="remove-button">
+            <button
+              onClick={() => deleteTask(task)}
+              tabIndex="-1"
+              className="remove-button"
+            >
               <FaTimes style={{ verticalAlign: "middle" }} />
             </button>
           </li>
         ))}
       </ul>
-      <button className="add-button" onClick={addTask}>
+      <button className="add-button" onClick={addTask} key="w">
         Add task
       </button>
     </div>
