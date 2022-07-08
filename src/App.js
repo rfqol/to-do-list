@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { CgDarkMode } from "react-icons/cg";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,14 @@ function App() {
   function deleteTask(task) {
     task.isDone && setCompletedTasksCount(completedTasksCount - 1);
     setTasks(tasks.filter(t => t.id !== task.id));
+  }
+
+  function toggleTheme() {
+    if (document.body.style.background === "rgb(18, 18, 18)") {
+      document.body.style = "background: initial; color: initial;";
+    } else {
+      document.body.style = "background: rgb(18,18,18); color: #e2e3e7;";
+    }
   }
 
   return (
@@ -88,6 +97,9 @@ function App() {
       </ul>
       <button className="add-button" onClick={addTask} key="w">
         Add task
+      </button>
+      <button className="toggle-theme-button" onClick={toggleTheme}>
+        <CgDarkMode />
       </button>
     </div>
   );
