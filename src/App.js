@@ -95,7 +95,7 @@ function App() {
           </li>
         ))}
       </ul>
-      <button className="add-button" onClick={addTask} key="w">
+      <button className="add-button" onClick={addTask}>
         Add task
       </button>
       <button className="toggle-theme-button" onClick={toggleTheme}>
